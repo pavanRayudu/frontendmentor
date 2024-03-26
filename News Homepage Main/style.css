@@ -1,0 +1,116 @@
+@font-face {
+  font-family: "Inter";
+  font-display: swap;
+  font-weight: 400 700 800;
+  src: url("./assets/fonts/Inter-VariableFont_slnt\,wght.ttf")
+    format("truetype");
+}
+:root {
+  --clr-primary-400: hsl(35, 77%, 62%);
+  --clr-primary-600: hsl(5, 85%, 63%);
+
+  --clr-neutral-200: hsl(36, 100%, 99%);
+  --clr-neutral-400: hsl(233, 8%, 79%);
+  --clr-neutral-600: hsl(236, 13%, 42%);
+  --clr-neutral-900: hsl(240, 100%, 5%);
+
+  --ff-400: "Inter";
+  --fz-400: 0.9375rem;
+  --fw-400: 400;
+  --fw-700: 700;
+  --fw-800: 800;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+}
+
+body {
+  font-size: var(--fz-400);
+  font-weight: var(--fw-400);
+  font-family: var(--ff-400);
+  background-color: var(--clr-neutral-200);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+header,
+main {
+  margin: 1rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mobile-nav-toggle {
+  display: none;
+}
+
+.primary-navigation {
+  --gap : 1rem;
+
+  list-style: none;
+  display: flex;
+  gap: var(--gap);
+}
+
+.primary-navigation a {
+  text-decoration: none;
+  color: var(--clr-neutral-900);
+  font-weight: var(--fw-700);
+}
+
+@media screen and (max-width: 600px) {
+  .primary-navigation {
+    --gap :2rem;
+     
+    position: fixed;
+    inset: 0 0 0 30%;
+    background: var(--clr-neutral-200);
+    padding: min(20vh, 10rem) 2rem;
+    flex-direction: column;
+
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+  }
+
+  .primary-navigation[data-visible="true"] {
+    transform: translateX(0%);
+  }
+
+  .mobile-nav-toggle {
+    position: absolute;
+    background: url('./assets/images/icon-menu.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 2rem;
+    aspect-ratio: 1;
+    top: 1rem;
+    right: 2rem;
+    z-index: 1000;
+    border: 0;
+    display: block;
+  }
+  .mobile-nav-toggle[aria-expanded = 'true']{
+    background: url('./assets/images/icon-menu-close.svg');
+  }
+}
+
+@media screen and (min-width: 50em) {
+  header,
+  main {
+    margin-inline: 10.5rem;
+  }
+  .primary-navigation {
+  }
+}
+
+header .logo {
+}
