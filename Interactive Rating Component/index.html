@@ -14,20 +14,85 @@
   </head>
   <body>
     <div class="wrapper">
-      <img src="./images/icon-star.svg" alt="star icon" />
+      <img class="icon" src="./images/icon-star.svg" alt="star icon" />
       <h1 class="m-2">How did we do?</h1>
-      <p class="clr-text fs-500">
+      <p class="wrapper_text">
         Please let us know how we did with your support request. All feedback is
         appreciated to help us improve our offering!
       </p>
-      <ul role="list" class="clr-text m-2">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-      </ul>
-      <button>Submit</button>
+
+      <form>
+        <div class="rating-btns">
+          <input type="radio" id="star1" name="rating" value="1" />
+          <label class="rating-btn__label" for="star1">1</label>
+          <input type="radio" id="star2" name="rating" value="2" />
+          <label class="rating-btn__label" for="star2">2</label>
+          <input type="radio" id="star3" name="rating" value="3" />
+          <label class="rating-btn__label" for="star3">3</label>
+          <input type="radio" id="star4" name="rating" value="4" />
+          <label class="rating-btn__label" for="star4">4</label>
+          <input type="radio" id="star5" name="rating" value="5" />
+          <label class="rating-btn__label" for="star5">5</label>
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
     </div>
+
+    <div class="thankyou">
+      <picture>
+        <img src="./images/illustration-thank-you.svg" alt="star icon" />
+      </picture>
+      <p class="result" id="result"></p>
+      <h1>Thank you!</h1>
+      <p>
+        We appreciate you taking the time to give a rating. If you ever need
+        more support, don’t hesitate to get in touch!
+      </p>
+
+      <span class="author">
+        Challenge by Frontend Mentor. Coded by Pavan Rayudu.</span>
+    </div>
+
+    <script>
+      let rating = document.getElementsByName("rating");
+      let labels = document.getElementsByClassName("rating-btn__label");
+      const submitBtn = document.querySelector('button[type = "submit"]');
+      const form = document.querySelector("form");
+      const result = document.getElementById("result");
+      const wrapper = document.querySelector(".wrapper");
+      const thankyou = document.querySelector(".thankyou");
+
+      let rating_value;
+
+      for (let i = 0; i < rating.length; i++) {
+        rating[i].addEventListener("click", (e) => {
+          setRating(e.target.value);
+        });
+      }
+      console.log(submitBtn.innerHTML);
+
+      function setRating(val) {
+        rating_value = val;
+        for (let i = 0; i < rating.length; i++) {
+          if (i === val - 1) {
+            labels[i].classList.add("checked");
+            labels[i - 1].classList.add("checked_prev");
+          }
+        }
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log("Rating : " + rating_value);
+        for (let i = 0; i < labels.length; i++) {
+          labels[i].classList.remove("checked");
+        }
+        labels[rating_value - 2].classList.remove("checked_prev");
+        wrapper.style.display = "none";
+        thankyou.style.display = "grid";
+        result.innerHTML = `You selected ${rating_value} out of 5`;
+      });
+    </script>
   </body>
 </html>
