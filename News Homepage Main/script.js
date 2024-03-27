@@ -9,6 +9,7 @@ navToggle.addEventListener('click',() =>{
     if(visibility === "false" ){
         primaryNav.setAttribute('data-visible',true)
         navToggle.setAttribute('aria-expanded',true)
+        // navToggle.style.background = 
     }
     else{
         primaryNav.setAttribute('data-visible',false)
